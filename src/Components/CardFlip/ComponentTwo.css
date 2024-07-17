@@ -1,0 +1,63 @@
+#root {
+    height: 100vh;
+    width: 100vw;
+}
+
+h1 {
+    text-align: center;
+}
+
+.card-grid {
+    margin: auto auto;
+    width: 75%;
+    height: 75%;
+    display: grid;
+    align-items: center;
+    justify-items: center;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 1rem;
+    padding: 30px;
+    background-color: beige;
+}
+
+.card {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+    transform-style: preserve-3d;
+    transition: transform 350ms;
+    height: 250px;
+    width: 250px;
+   
+}
+
+.card.flip {
+    transform: perspective(1000px) rotateY(180deg);
+}
+
+.card .cardFront, 
+.card .cardBack {
+    backface-visibility: hidden;
+    position: absolute;
+    padding: 1rem;
+    width: 100%;
+    height: 100%;
+}
+.cardFront>img{
+    width: 100%;
+    height: 100%;
+}
+
+.card .cardBack {
+    transform: rotateY(180deg);
+    background-color: rgb(106, 105, 105);
+    border-radius: 20px;
+    border: 10px solid black;
+}
+.card .cardFront {
+    background-color:antiquewhite;
+    border-radius: 20px;
+    border: 10px solid black;
+}

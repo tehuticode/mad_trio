@@ -10,6 +10,7 @@ h1 {
 
 .card-grid {
     margin: auto auto;
+    color: white;
     width: 75%;
     height: 75%;
     display: grid;

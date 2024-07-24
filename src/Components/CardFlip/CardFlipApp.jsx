@@ -18,6 +18,7 @@ function CardFlipApp() {
   return (
     <>
     <h1>Click on a card to learn more about the hardware!</h1>
+    
     <div className="card-grid">
       
       {flipCards.map((cardInfo, index) => (

@@ -1,6 +1,6 @@
 # Trimate Medical Chatbot
 
-A simple medical chatbot API using FastAPI and GPT-4 mini.
+A simple medical chatbot API using FastAPI and GPT-4o mini.
 
 ## Description
 
@@ -78,11 +78,7 @@ This project implements a chatbot for Trimate Medical, a small village clinic. T
 
 You can modify the `CUSTOM_PROMPT` in `api.py` to change the chatbot's behavior and guidelines.
 
-## License
-
-[Your chosen license]
 
 ## Acknowledgments
 
-- The developers of GPT-4 mini
-- FastAPI for the web framework
+_Perry, Michael, Adam_

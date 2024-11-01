@@ -20,7 +20,7 @@ app.add_middleware(
 )
 
 # Set up OpenAI API
-openai.api_key = os.getenv("OPENAI_API_KEY")
+openai.api_key = os.getenv("GPT4_MINI_API_KEY")
 if not openai.api_key:
     raise ValueError("No OpenAI API key found. Please check your .env file.")
 print(f"API Key loaded: {openai.api_key[:5]}...")  # Prints first 5 characters of the API key
@@ -29,19 +29,54 @@ class Query(BaseModel):
     text: str
 
 CUSTOM_PROMPT = """
-You are an AI assistant for Trimate Medical, a small village clinic with three doctors specializing in GP, pediatrics, and orthopedics. Provide friendly, clear, and helpful medical advice to patients, while ensuring urgent cases are escalated to doctors immediately.
+You are a bot that generates exactly 50 unique training phrases based on two input phrases provided by the user. The output should be formatted in JSON with each phrase labeled in a sequence from 1 to 50.
 
-Guidelines:
-1. Be friendly and approachable in your tone.
-2. Use simple, easy-to-understand language when explaining medical concepts.
-3. Provide clear and specific medical advice, avoiding vague recommendations.
-4. If a situation seems urgent or potentially life-threatening, respond with "URGENT: [brief explanation]" and advise the patient to seek immediate medical attention.
-5. Always remind patients that your advice is not a substitute for professional medical examination.
+The user will input two training phrases, which serve as the basis for the variations you create.
 
-User Query: {query}
+**Generation Techniques**:
+1. Use synonyms to replace key verbs, nouns, and adjectives, maintaining the phrase's meaning.
+2. Modify sentence structures by changing grammatical moods and using active/passive voices.
+3. Create both formal and informal tone variations.
+4. Combine parts of the input phrases in new ways.
 
-Your response:
+**Example Inputs**:
+1. "I want to make a booking"
+2. "Can I make a booking?"
+
+**Output Format**:
+{ "intent": "booking appointment", "training_phrases": [ {"phrase_1": "I would like to book an appointment."}, {"phrase_2": "Can I book an appointment?"}, {"phrase_3": "I'd like to schedule a booking."}, ... {"phrase_50": "Please assist me in making a reservation."} ] }
+Please ensure there are exactly 50 phrases.
 """
+
+# CUSTOM_PROMPT = """
+# You are a bot that generates 50 training phases based on two input phrases provided by the user. Output the result in JSON format
+# The user will input two training phrases that will be used as starting points for the training phrases.
+
+# Example inputs:
+# I want to make a booking,
+# Can I make a booking?
+
+# Techniques:
+# Identify the verbs, nouns and adjectives in the phrases. Use synonyms to replace key verbs, nouns, and adjectives to create variety in the prompts, making sure the meaning of the phrases remains unchanged.
+# Change the sentence structure, via switching the gramatical moods between indicative and imperative.
+# Make use of active and passive voicings.
+# Vary between formal and informal tones.
+# Merge the input phrases to make new sentences.
+
+# Apply the above techniques to generate 50 unique training phrases.
+# Output the result as an array of objects in JSON Format, where each object has a phrase key with a unique index value.
+# Include an intent field at the beginning of the object that describes the purpose of the phrases. example: "booking appointment"
+# Example JSON output format:
+# {
+# "intent":"booking_appointment"
+# "training_phrases": [
+# {"phrase_1": "I would like to book an appointment."},
+# {"phrase_2": "Can I book an appointment?"},
+# {"phrase_3": "I'd like to book an appointment."},
+# etc.
+# ]
+# }
+# """
 
 @app.get("/")
 async def root():
@@ -59,7 +94,7 @@ async def chat(query: Query):
                 {"role": "system", "content": CUSTOM_PROMPT},
                 {"role": "user", "content": user_query}
             ],
-            max_tokens=150
+            max_tokens=2048
         )
         print(f"OpenAI API Response type: {type(response)}")
         print(f"OpenAI API Response content: {response}")

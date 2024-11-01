@@ -1,0 +1,11 @@
+
+// created a jsconfig file to bypass the typescript requirement for shadcn
+{
+    "compilerOptions": {
+      "baseUrl": ".",
+      "paths": {
+        "@/*": ["./src/*"]
+      }
+    }
+  }
+  

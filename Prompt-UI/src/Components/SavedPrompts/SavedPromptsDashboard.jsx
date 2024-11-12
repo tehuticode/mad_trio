@@ -107,7 +107,7 @@ export default function SavedResponseDashboard() {
       <div className="flex gap-4 flex-grow">
         {/* Saved prompts list */}
         <div className="bg-gray-700 shadow-md p-4 rounded-lg flex-1 flex flex-col">
-          <div className="min-h-full pb-4 flex-grow overflow-y-auto">
+          <div className="min-h-full  flex-grow overflow-y-auto">
             <ul>
               {savedPrompts.map((prompt) => (
                 <li
@@ -124,10 +124,10 @@ export default function SavedResponseDashboard() {
 
         {/* Responses and editing section */}
         <div className="bg-gray-700 shadow-md p-4 rounded-lg flex-1 flex flex-col">
-          <h4 className="font-bold mb-4 bg-green-200 rounded w-fit text-gray-600 p-3">
+          <h4 className="font-bold bg-green-200 rounded w-fit text-gray-600 p-3">
             Intent: {selectedPrompt ? selectedPrompt.intent : "No intent selected"}
           </h4>
-          <h3 className="font-bold mb-4 ">
+          <h3 className="font-bold mb-2">
             Responses for: {selectedPrompt ? <div className="bg-green-200 text-gray-600 w-fit p-3 rounded">{selectedPrompt.prompts.join(", ")}</div> : <div>Select a prompt</div>}
           </h3>
           

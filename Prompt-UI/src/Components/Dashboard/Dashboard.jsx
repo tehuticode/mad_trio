@@ -70,8 +70,8 @@ export default function Dashboard() {
   ];
 
   return (
-    <div className="flex flex-col justify-center border p-10 rounded bg-gray-800 text-white h-screen w-screen">
-      <div className="flex justify-between items-center border-b-2 border-gray-600 mb-4 pb-2">
+    <div className="flex flex-col justify-center border p-10 bg-gray-800 text-white h-screen w-screen">
+      <div className="flex justify-between items-center border-b-2 border-gray-600 pb-2">
         <div className="flex space-x-4">
           {/* Buttons to toggle between creating prompts and viewing saved prompts */}
           <button className={`px-4 py-2 bg-gray-600 text-white rounded-t-md ${view === 'create' ? 'bg-gray-800' : ''}`} onClick={() => setView('create')}>Create Prompt</button>
@@ -103,7 +103,7 @@ export default function Dashboard() {
           </div>
           {/* DataTable for displaying training phrases */}
           <div className="bg-gray-700 shadow-md p-4 rounded-lg flex-1">
-            <h2 className="font-bold mb-4 bg-green-200 w-fit rounded p-3 text-gray-600">Intent: {intent}</h2> {/* display the current intent */}
+            <h2 className="font-bold bg-green-200 w-fit rounded p-3 text-gray-600">Intent: {intent}</h2> {/* display the current intent */}
             <h2 className="font-bold mb-4">Prompt Output List</h2>
             <div className="min-h-full">
               <DataTable columns={columns} data={trainingPhrases} isLoading={loading} /> {/* display data table with training phrases */}
